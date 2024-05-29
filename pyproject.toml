@@ -12,10 +12,16 @@ numpy = "^1.26.4"
 pandas = "^2.2.2"
 keras = "^3.3.3"
 nltk = "^3.8.1"
-mypy = "^1.10.0"
-pre-commit = "^3.7.1"
 
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.2.1"
+pre-commit = "^3.7.1"
+mypy = "^1.10.0"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+pythonpath = "."

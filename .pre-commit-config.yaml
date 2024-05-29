@@ -16,4 +16,4 @@ repos:
     rev: v1.10.0
     hooks:
     - id: mypy
-      args: [--strict, --warn-return-any]
+      args: [--strict, --warn-return-any, --explicit-package-bases]

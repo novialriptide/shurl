@@ -4,7 +4,7 @@ Shurl is Shrunk's artificial intelligence platform. [Shrunk](https://github.com/
 
 ## Get Started
 
-We use [Poetry](https://python-poetry.org/) to manage our Python dependencies, you can learn more about it [here](https://python-poetry.org/docs/). We also use [Docker](https://docker.io/) to create consistent development and production environments by containerizing our applications.
+We use [Poetry](https://python-poetry.org/) to manage our Python dependencies, you can learn more about it [here](https://python-poetry.org/docs/). We also use [Docker](https://docker.io/) to create consistent development and production environments by containerizing our applications. We also use [pre-commit](https://pre-commit.com/) to ensure the project stays clean and maintainable during its lifespan as deep-learning is a complex topic.
 
 1. Clone this respository
 2. Install [pre-commit](https://pre-commit.com/)
@@ -17,5 +17,11 @@ pre-commit install
 4. Use Docker Compose to launch the service with the following command:
 
 ```bash
-docker-compose up
+docker-compose up --build app
+```
+
+If you want to test if your changes aren't regressive, you can run this command:
+
+```bash
+docker-compose up --build test
 ```
