@@ -2,7 +2,7 @@ from shurl.utils import preprocess
 
 
 class TestPreprocessing:
-    def test_brackets(self) -> None:
+    def test_excerpt1(self) -> None:
         value = preprocess(
             """I glanced at my arm readouts (This is a test string that should
 not be in the final output). My oxygen reserve plummeted while I watched,
