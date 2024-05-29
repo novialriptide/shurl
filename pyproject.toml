@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "shurl"
+version = "0.1.0"
+description = ""
+authors = ["Rutgers Open System Solutions <oss@oit.rutgers.edu>"]
+license = "Apache 2.0"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+numpy = "^1.26.4"
+pandas = "^2.2.2"
+keras = "^3.3.3"
+nltk = "^3.8.1"
+mypy = "^1.10.0"
+pre-commit = "^3.7.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
