@@ -14,13 +14,19 @@ We use [Poetry](https://python-poetry.org/) to manage our Python dependencies, y
 pre-commit install
 ```
 
-4. Use Docker Compose to launch the service with the following command:
+4. You're ready to contribute
+
+### Build
+
+Launch the service.
 
 ```bash
 docker-compose up --build app
 ```
 
-If you want to test if your changes aren't regressive, you can run this command:
+### Test
+
+Check if your changes aren't regressive.
 
 ```bash
 docker-compose up --build test
