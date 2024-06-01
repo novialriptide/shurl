@@ -1,5 +1,6 @@
 from typing import List
 from sklearn.feature_extraction.text import TfidfVectorizer
+import bson
 import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
@@ -12,6 +13,18 @@ class App:
         self.tfidf = TfidfVectorizer()
         nltk.download("punkt")
         nltk.download("stopwords")
+        self.load_training_data("data/urls.bson")
+
+    def load_training_data(self, file_path: str) -> None:
+        with open(file_path, "rb") as file:
+            urls_data = bson.decode_all(file.read())
+
+        for url in urls_data:
+            alias = url["aliases"][0]["alias"]
+            if "-" not in alias:
+                continue
+
+            print(url["long_url"], url["aliases"][0]["alias"])
 
     def run(self, text: str, options_count: int = 5) -> List[str]:
         # text = preprocess(text)
