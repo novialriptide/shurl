@@ -163,4 +163,4 @@ cython_debug/
 .mypy_cache/
 
 # Shurl
-data/
+*.bson
