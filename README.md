@@ -21,7 +21,7 @@ pre-commit install
 Launch the service.
 
 ```bash
-docker-compose up --build app
+docker-compose up app
 ```
 
 ### Test
@@ -29,5 +29,5 @@ docker-compose up --build app
 Check if your changes aren't regressive.
 
 ```bash
-docker-compose up --build test
+docker-compose up test
 ```
