@@ -1,4 +1,4 @@
-# Shurl
+# Shurl ![License](https://img.shields.io/github/license/novialriptide/shurl)
 
 Shurl is Shrunk's artificial intelligence platform. [Shrunk](https://github.com/oss/shrunk) is Rutgers University's official open-source URL shortener. This is not meant to be a standalone project and is supposed to be a submodule for [Shrunk](https://github.com/oss/shrunk).
 
