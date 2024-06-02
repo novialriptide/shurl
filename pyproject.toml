@@ -14,12 +14,14 @@ keras = "^3.3.3"
 nltk = "^3.8.1"
 scikit-learn = "^1.5.0"
 pymongo = "^4.7.2"
+beautifulsoup4 = "^4.12.3"
 
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.2.1"
 pre-commit = "^3.7.1"
 mypy = "^1.10.0"
+types-requests = "^2.32.0.20240523"
 
 [build-system]
 requires = ["poetry-core"]

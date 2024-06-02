@@ -1,6 +1,7 @@
+from utils import parse_training_data_from_bson
+
 from typing import List
 from sklearn.feature_extraction.text import TfidfVectorizer
-import bson
 import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
@@ -13,37 +14,8 @@ class App:
         self.tfidf = TfidfVectorizer()
         nltk.download("punkt")
         nltk.download("stopwords")
-        self.parse_training_data_from_bson("data/urls.bson")
-
-    def parse_training_data_from_bson(self, file_path: str) -> None:
-        """
-        Parse training data from a BSON file, this will
-        be cached in `.shurl-cache`.
-
-        BSON is a filetype made by MongoDB.
-
-        @file_path: The path of the BSON file from Shrunk.
-        """
-        with open(file_path, "rb") as file:
-            urls_data = bson.decode_all(file.read())
-
-        parsed_data = []
-
-        for url in urls_data:
-            if len(url["aliases"]) == 0:
-                continue
-
-            alias = url["aliases"][0]["alias"]
-            if "-" not in alias:
-                continue
-
-            document = {
-                "original_url": url["long_url"],
-                "aliases": [alias["alias"] for alias in url["aliases"]],
-            }
-
-            parsed_data.append(document)
-            print(document)
+        data = parse_training_data_from_bson("data/urls.bson")
+        print(len(data))
 
     def run(self, text: str, options_count: int = 5) -> List[str]:
         # text = preprocess(text)

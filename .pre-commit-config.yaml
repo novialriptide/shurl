@@ -17,3 +17,4 @@ repos:
     hooks:
     - id: mypy
       args: [--strict, --warn-return-any, --explicit-package-bases]
+      additional_dependencies: ['types-requests']
