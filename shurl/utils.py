@@ -77,7 +77,7 @@ def parse_training_data_from_bson(file_path: str) -> List[dict[str, Any]]:
 
         document = {
             "original_url": url["long_url"],
-            "aliases": [alias["alias"] for alias in url["aliases"]],
+            "aliases": [preprocess(alias["alias"]) for alias in url["aliases"]],
             "webpage_contents": webpage_contents,
         }
 
