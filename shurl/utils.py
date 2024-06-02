@@ -1,6 +1,7 @@
 from typing import List, Any
 from urllib.parse import urlparse
 from bs4 import BeautifulSoup
+import bs4
 import requests
 import bson
 import urllib3
@@ -26,10 +27,13 @@ def parse_useful_elements(html_content: str) -> List[str]:
     valid_elements = ["li", "p", "span", "h1", "h2", "h3", "h4", "h5", "h6"]
     out = []
 
-    page = BeautifulSoup(html_content, "html.parser")
-    for element in valid_elements:
-        for p in page.find_all(element):
-            out.append(p.text.strip())
+    try:
+        page = BeautifulSoup(html_content, "html.parser")
+        for element in valid_elements:
+            for p in page.find_all(element):
+                out.append(p.text.strip())
+    except bs4.builder.ParserRejectedMarkup:
+        pass
 
     return out
 
@@ -74,6 +78,8 @@ def parse_training_data_from_bson(file_path: str) -> List[dict[str, Any]]:
             webpage_contents = parse_useful_elements(webpage_response.text)
         except requests.exceptions.Timeout:
             continue
+        except requests.exceptions.ConnectionError:
+            continue
 
         document = {
             "original_url": url["long_url"],
@@ -82,5 +88,6 @@ def parse_training_data_from_bson(file_path: str) -> List[dict[str, Any]]:
         }
 
         parsed_data.append(document)
+        print(f"Loading: {url['long_url']}")
 
     return parsed_data
