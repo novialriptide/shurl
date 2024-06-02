@@ -1,5 +1,4 @@
 from utils import parse_training_data_from_bson
-
 from typing import List
 from sklearn.feature_extraction.text import TfidfVectorizer
 import nltk
@@ -23,9 +22,7 @@ class App:
 
         stop_words = set(stopwords.words("english"))
         words = word_tokenize(text)
-        filtered_words = [
-            word for word in words if word.isalnum() and word not in stop_words
-        ]
+        filtered_words = [word for word in words if word.isalnum() and word not in stop_words]
 
         common_words = Counter(filtered_words).most_common(15)
         keywords = [word for word, _ in common_words]
