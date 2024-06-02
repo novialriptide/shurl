@@ -17,7 +17,6 @@ class App:
         print(len(data))
 
     def run(self, text: str, options_count: int = 5) -> List[str]:
-        # text = preprocess(text)
         text = text.lower()
 
         stop_words = set(stopwords.words("english"))
