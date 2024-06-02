@@ -1,9 +1,11 @@
 from typing import List, Any
+from urllib.parse import urlparse
 from bs4 import BeautifulSoup
 import requests
 import bson
 import urllib3
 import re
+from config import IGNORED_DOMAINS, ONLY_ACCEPT_OK_RESPONSES
 
 
 def preprocess(value: str) -> List[str]:
@@ -50,6 +52,9 @@ def parse_training_data_from_bson(file_path: str) -> List[dict[str, Any]]:
     parsed_data = []
 
     for url in urls_data:
+        if urlparse(url["long_url"]).hostname in IGNORED_DOMAINS:
+            continue
+
         if len(url["aliases"]) == 0:
             continue
 
@@ -63,7 +68,7 @@ def parse_training_data_from_bson(file_path: str) -> List[dict[str, Any]]:
                 timeout=5,
                 verify=False,
             )
-            if webpage_response.status_code != 200:
+            if webpage_response.status_code != 200 and ONLY_ACCEPT_OK_RESPONSES:
                 continue
 
             webpage_contents = parse_useful_elements(webpage_response.text)
