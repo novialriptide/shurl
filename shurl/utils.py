@@ -75,7 +75,7 @@ def parse_training_data_from_bson(file_path: str) -> List[dict[str, Any]]:
             if webpage_response.status_code != 200 and ONLY_ACCEPT_OK_RESPONSES:
                 continue
 
-            webpage_contents = parse_useful_elements(webpage_response.text)
+            webpage_contents = webpage_response.text
         except requests.exceptions.Timeout:
             continue
         except requests.exceptions.ConnectionError:
