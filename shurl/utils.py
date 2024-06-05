@@ -6,7 +6,7 @@ import requests
 import bson
 import urllib3
 import re
-from config import IGNORED_DOMAINS, ONLY_ACCEPT_OK_RESPONSES
+from config import IGNORED_DOMAINS, ONLY_ACCEPT_OK_RESPONSES, REJECT_PDF_CONTENT, REJECT_IMAGE_CONTENT
 
 
 def preprocess(value: str) -> List[str]:
@@ -62,8 +62,15 @@ def parse_training_data_from_bson(file_path: str) -> List[dict[str, Any]]:
         if len(url["aliases"]) == 0:
             continue
 
-        alias = url["aliases"][0]["alias"]
-        if "-" not in alias:
+        # As of June 5th 2024, Shrunk does not specify if an alias is custom or not.
+        # This is a temporary solution.
+        met_requirements = False
+        for alias in url["aliases"]:
+            alias = alias["alias"]
+            if "-" in alias:
+                met_requirements = True
+
+        if not met_requirements:
             continue
 
         try:
@@ -75,19 +82,35 @@ def parse_training_data_from_bson(file_path: str) -> List[dict[str, Any]]:
             if webpage_response.status_code != 200 and ONLY_ACCEPT_OK_RESPONSES:
                 continue
 
+            if (
+                "Content-Type" in webpage_response.headers
+                and webpage_response.headers["Content-Type"] == "application/pdf"
+                and REJECT_PDF_CONTENT
+            ):
+                continue
+
+            if (
+                "Content-Type" in webpage_response.headers
+                and (webpage_response.headers["Content-Type"] in ["image/jpeg", "image/png", "image/gif"])
+                and REJECT_IMAGE_CONTENT
+            ):
+                continue
+
             webpage_contents = webpage_response.text
         except requests.exceptions.Timeout:
             continue
         except requests.exceptions.ConnectionError:
             continue
 
-        document = {
-            "original_url": url["long_url"],
-            "aliases": [alias["alias"] for alias in url["aliases"]],
-            "webpage_contents": webpage_contents,
-        }
+        for alias in url["aliases"]:
+            document = {
+                "original_url": url["long_url"],
+                "aliases": alias["alias"],
+                "webpage_contents": webpage_contents,
+            }
 
-        parsed_data.append(document)
-        print(f"Loading: {url['long_url']}")
+            parsed_data.append(document)
+
+        print(f"Loaded: {url['long_url']}")
 
     return parsed_data

@@ -18,3 +18,9 @@ IGNORED_DOMAINS: List[str] = [
 Some websites may have been deleted after their shortened URL creation.
 """
 ONLY_ACCEPT_OK_RESPONSES: bool = True
+
+"""
+Reject based on the response header's "Content-Type"
+"""
+REJECT_PDF_CONTENT: bool = True
+REJECT_IMAGE_CONTENT: bool = True
