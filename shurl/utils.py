@@ -104,6 +104,7 @@ def parse_training_data_from_bson(file_path: str) -> List[dict[str, Any]]:
 
         for alias in url["aliases"]:
             document = {
+                "title": url["title"],
                 "original_url": url["long_url"],
                 "aliases": alias["alias"],
                 "webpage_contents": webpage_contents,
