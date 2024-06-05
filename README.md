@@ -10,6 +10,8 @@ Shurl is Shrunk's artificial intelligence platform. [Shrunk](https://github.com/
 - [ ] Produces suggestions for a shortened URL given a valid URL
 - [ ] Produces title suggestions for the shortened URL
 - [ ] Interactive web app for demonstration purposes
+- [ ] Produces QR code Art with Stable Diffusion
+
 
 ## Get Started
 
