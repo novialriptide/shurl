@@ -2,10 +2,15 @@ services:
   app:
     build: .
     command: [python3, /app/shurl/app.py]
+    ports:
+      - "4352:4352"
     stdin_open: true
     tty: true
     volumes:
       - $PWD:/app
+    environment:
+      - FLASK_DEBUG=1
+      - FLASK_APP=/shurl/app.py
 
   test:
     build:

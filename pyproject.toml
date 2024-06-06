@@ -13,6 +13,7 @@ pymongo = "^4.7.2"
 beautifulsoup4 = "^4.12.3"
 colorama = "^0.4.6"
 requests = "^2.32.3"
+flask = "^3.0.3"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.2.1"
@@ -20,6 +21,7 @@ pre-commit = "^3.7.1"
 mypy = "^1.10.0"
 types-requests = "^2.32.0.20240523"
 types-tensorflow = "^2.16.0.20240428"
+types-flask = "^1.1.6"
 black = "^24.4.2"
 
 [build-system]
