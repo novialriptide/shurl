@@ -38,6 +38,17 @@ def parse_useful_elements(html_content: str) -> List[str]:
     return out
 
 
+def delete_attributes(html_content: str) -> str:
+    page = BeautifulSoup(html_content, "html.parser")
+    for tag in page.find_all():
+        if "style" in tag.attrs:
+            del tag.attrs["style"]
+        if "class" in tag.attrs:
+            del tag.attrs["class"]
+
+    return str(page)
+
+
 def parse_training_data_from_bson(file_path: str) -> List[dict[str, Any]]:
     """
     Parse training data from a BSON file, this will
@@ -96,7 +107,7 @@ def parse_training_data_from_bson(file_path: str) -> List[dict[str, Any]]:
             ):
                 continue
 
-            webpage_contents = webpage_response.text
+            webpage_contents = delete_attributes(webpage_response.text)
         except requests.exceptions.Timeout:
             continue
         except requests.exceptions.ConnectionError:
