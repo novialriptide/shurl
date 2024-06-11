@@ -1,29 +1,28 @@
 [tool.poetry]
 name = "shurl"
 version = "0.1.0"
-description = ""
+description = "Shrunk's artificial intelligence platform."
 authors = ["Rutgers Open System Solutions <oss@oit.rutgers.edu>"]
 license = "Apache 2.0"
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
-keras = "^3.3.3"
 pymongo = "^4.7.2"
 beautifulsoup4 = "^4.12.3"
-colorama = "^0.4.6"
 requests = "^2.32.3"
 flask = "^3.0.3"
-tensorflow = "^2.16.1"
+transformers = "^4.41.2"
+torch = "^2.3.1"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.2.1"
 pre-commit = "^3.7.1"
 mypy = "^1.10.0"
 types-requests = "^2.32.0.20240523"
-types-tensorflow = "^2.16.0.20240428"
 types-flask = "^1.1.6"
 black = "^24.4.2"
+autoflake = "^2.3.1"
 
 [build-system]
 requires = ["poetry-core"]

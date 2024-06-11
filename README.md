@@ -43,6 +43,4 @@ docker-compose up test
 
 ## Citations
 
-- Google Brain, [Sequence to Sequence Learning with Neural Networks](https://arxiv.org/abs/1409.3215)
-- Christopher Olah, [Understanding LSTMs](https://colah.github.io/posts/2015-08-Understanding-LSTMs/)
-- Apple Machine Learning Research, [Compressing LLMs: The Truth is Rarely Pure and Never Simple](https://arxiv.org/abs/2310.01382)
+- Google Research, [Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer](https://huggingface.co/google-t5/t5-small)
