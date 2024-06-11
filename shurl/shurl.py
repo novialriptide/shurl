@@ -19,6 +19,7 @@ class Shurl:
         self.model = T5ForConditionalGeneration.from_pretrained("google-t5/t5-small")
 
     def load_data(self) -> Any:
+        """Load the training data, this is assuming you're using Shrunk's production database dump."""
         cache_file_path = os.path.join(CACHE_DIRECTORY, "data.json")
 
         if os.path.isfile(cache_file_path):
@@ -34,7 +35,12 @@ class Shurl:
 
         return data
 
+    def train(self) -> None:
+        """Train a model using the loaded data."""
+        pass
+
     def handle_url(self, url: str) -> str:
+        """Feed a URL to Shurl."""
         webpage_contents = requests.get(url).text
 
         input_ids = self.tokenizer(delete_attributes(webpage_contents), return_tensors="pt").input_ids
