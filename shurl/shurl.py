@@ -1,8 +1,10 @@
 from typing import Any
-from utils import parse_training_data_from_bson
+
+from utils import parse_training_data_from_bson, delete_attributes
 from config import CACHE_DIRECTORY
 import os
 import json
+import requests
 
 from transformers import T5Tokenizer, T5ForConditionalGeneration
 
@@ -31,3 +33,10 @@ class Shurl:
             json.dump(data, file, indent=4)
 
         return data
+
+    def handle_url(self, url: str) -> str:
+        webpage_contents = requests.get(url).text
+
+        input_ids = self.tokenizer(delete_attributes(webpage_contents), return_tensors="pt").input_ids
+        outputs = self.model.generate(input_ids)
+        return str(self.tokenizer.decode(outputs[0], skip_special_tokens=True))
