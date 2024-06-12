@@ -44,3 +44,4 @@ docker-compose up test
 
 - Hugging Face Inc, [Transformers: State-of-the-Art Natural Language Processing](https://aclanthology.org/2020.emnlp-demos.6/)
 - Google Research, [Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer](https://huggingface.co/google-t5/t5-small)
+- Google Research, [LongT5: Efficient Text-To-Text Transformer for Long Sequences](https://aclanthology.org/2022.findings-naacl.55)
