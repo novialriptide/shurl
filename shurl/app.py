@@ -2,6 +2,7 @@ from typing import Tuple, Any
 from shurl import Shurl  # type: ignore
 from flask import Flask, jsonify, request
 import validators
+import time
 
 app = Flask(__name__)
 shurl_app = Shurl()
@@ -19,9 +20,11 @@ def get_response() -> Tuple[Any, int]:
     if not validators.url(webpage_url):
         return jsonify({"success": False, "error": "Invalid URL"}), 400
 
+    start_time = time.time()
     response = shurl_app.handle_url(webpage_url)
+    end_time = time.time()
 
-    return jsonify({"success": True, "response": response}), 200
+    return jsonify({"success": True, "data": {"resopnse": response, "elapsed-time": end_time - start_time}}), 200
 
 
 @app.route("/trainer")
