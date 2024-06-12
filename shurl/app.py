@@ -1,6 +1,7 @@
-from typing import Tuple
+from typing import Tuple, Any
 from shurl import Shurl  # type: ignore
-from flask import Flask
+from flask import Flask, jsonify, request
+import validators
 
 app = Flask(__name__)
 shurl_app = Shurl(epoch_count=100, batch_size=64)
@@ -11,11 +12,23 @@ def hello_world() -> str:
     return "Hello, world!"
 
 
+@app.route("/response", methods=["POST"])
+def get_response() -> Tuple[Any, int]:
+    webpage_url = request.form["webpage_url"]
+
+    if not validators.url(webpage_url):
+        return jsonify({"success": False, "error": "Invalid URL"}), 400
+
+    response = shurl_app.handle_url(webpage_url)
+
+    return jsonify({"success": True, "response": response}), 200
+
+
 @app.route("/trainer")
-def trainer() -> Tuple[str, int]:
+def trainer() -> Tuple[Any, int]:
     # TODO: Create a web application where you'll get a screenshot
     # of a website and will be asked to create a shortened URL for it.
-    return "Not ready yet", 501
+    return jsonify({"success": False, "error": "Not implemented yet"}), 501
 
 
 if __name__ == "__main__":
