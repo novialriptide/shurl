@@ -9,7 +9,7 @@ import evaluate
 import requests
 
 from datasets import load_dataset
-from transformers import AutoTokenizer, T5ForConditionalGeneration, TrainingArguments, Trainer
+from transformers import AutoTokenizer, LongT5ForConditionalGeneration, TrainingArguments, Trainer
 
 
 class Shurl:
@@ -20,7 +20,7 @@ class Shurl:
         # TODO: Use [LongT5](https://huggingface.co/docs/transformers/en/model_doc/longt5)
         # instead since there is a character limit.
         self.tokenizer = AutoTokenizer.from_pretrained("google-t5/t5-small")
-        self.model = T5ForConditionalGeneration.from_pretrained("google-t5/t5-small")
+        self.model = LongT5ForConditionalGeneration.from_pretrained("google/long-t5-local-base")
         self.training_args = TrainingArguments(output_dir=".shurl-cache")
         self.trainer: Optional[Trainer] = None
 
@@ -68,7 +68,7 @@ class Shurl:
 
     def handle_url(self, url: str) -> str:
         """Feed a URL to Shurl."""
-        webpage_contents = requests.get(url).text[:512]
+        webpage_contents = requests.get(url).text
 
         input_ids = self.tokenizer(delete_attributes(webpage_contents), return_tensors="pt").input_ids
         outputs = self.model.generate(input_ids)
