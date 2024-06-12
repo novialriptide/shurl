@@ -8,10 +8,12 @@ Ignore domain as training data if listed.
 """
 IGNORED_DOMAINS: List[str] = [
     "rutgers.zoom.us",  # require some type of authentication
+    "zoom.us/j",  # require some type of authentication
     "meet.google.com",  # require some type of authentication
     "rutgers.mediaspace.kaltura.com",  # require some type of authentication
     "youtube.com",  # Usually does not have enough information
     "youtu.be",  # Usually does not have enough information
+    "maps.rutgers.edu",  # Usually does not have enough information
 ]
 
 """
