@@ -68,7 +68,7 @@ class Shurl:
 
     def handle_url(self, url: str) -> str:
         """Feed a URL to Shurl."""
-        webpage_contents = requests.get(url).text
+        webpage_contents = requests.get(url).text[:512]
 
         input_ids = self.tokenizer(delete_attributes(webpage_contents), return_tensors="pt").input_ids
         outputs = self.model.generate(input_ids)
