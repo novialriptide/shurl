@@ -4,7 +4,7 @@ from flask import Flask, jsonify, request
 import validators
 
 app = Flask(__name__)
-shurl_app = Shurl(epoch_count=100, batch_size=64)
+shurl_app = Shurl()
 
 
 @app.route("/")
