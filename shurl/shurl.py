@@ -1,22 +1,28 @@
-from typing import Any
+from typing import Any, Optional
 
 from utils import parse_training_data_from_bson, delete_attributes
 from config import CACHE_DIRECTORY
 import os
 import json
+import numpy
+import evaluate
 import requests
 
-from transformers import T5Tokenizer, T5ForConditionalGeneration
+from datasets import load_dataset
+from transformers import AutoTokenizer, T5ForConditionalGeneration, TrainingArguments, Trainer
 
 
 class Shurl:
     def __init__(self, epoch_count: int, batch_size: int) -> None:
         self.load_data()
+        self.dataset = load_dataset("json", data_files=".shurl-cache/data.json")
         self.epoch_count = epoch_count
         self.batch_size = batch_size
 
-        self.tokenizer = T5Tokenizer.from_pretrained("google-t5/t5-small")
+        self.tokenizer = AutoTokenizer.from_pretrained("google-t5/t5-small")
         self.model = T5ForConditionalGeneration.from_pretrained("google-t5/t5-small")
+        self.training_args = TrainingArguments(output_dir=".shurl-cache")
+        self.trainer: Optional[Trainer] = None
 
     def load_data(self) -> Any:
         """Load the training data, this is assuming you're using Shrunk's production database dump."""
@@ -37,7 +43,28 @@ class Shurl:
 
     def train(self) -> None:
         """Train a model using the loaded data."""
-        pass
+
+        def tokenize_function(examples: Any) -> Any:
+            return self.tokenizer(examples["title"], padding="max_length", truncation=True)
+
+        tokenized_datasets = self.dataset.map(tokenize_function, batched=True)
+        small_train_dataset = tokenized_datasets["train"].shuffle(seed=42).select(range(1000))
+        small_eval_dataset = tokenized_datasets["test"].shuffle(seed=42).select(range(1000))
+        metric = evaluate.load("accuracy")
+
+        def compute_metrics(eval_pred: Any) -> Any:
+            logits, labels = eval_pred
+            predictions = numpy.argmax(logits, axis=-1)
+            return metric.compute(predictions=predictions, references=labels)
+
+        self.trainer = Trainer(
+            model=self.model,
+            args=self.training_args,
+            compute_metrics=compute_metrics,
+            train_dataset=small_train_dataset,
+            eval_dataset=small_eval_dataset,
+        )
+        self.trainer.train()
 
     def handle_url(self, url: str) -> str:
         """Feed a URL to Shurl."""
