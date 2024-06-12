@@ -24,7 +24,7 @@ def get_response() -> Tuple[Any, int]:
     response = shurl_app.handle_url(webpage_url)
     end_time = time.time()
 
-    return jsonify({"success": True, "data": {"resopnse": response, "elapsed-time": end_time - start_time}}), 200
+    return jsonify({"success": True, "data": {"response": response, "elapsed-time": end_time - start_time}}), 200
 
 
 @app.route("/trainer")
