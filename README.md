@@ -1,4 +1,4 @@
-# Shurl [![license: Apache-2.0](https://img.shields.io/github/license/novialriptide/shurl)](./LICENSE) [![code style: ruff](https://img.shields.io/badge/code%20style-ruff-DDDD00.svg)](https://docs.astral.sh/ruff/)
+# Shurl [![build system: Poetry](https://img.shields.io/endpoint?url=https://python-poetry.org/badge/v0.json)](https://python-poetry.org/) [![code style: Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff) [![license: Apache-2.0](https://img.shields.io/github/license/novialriptide/shurl)](./LICENSE)
 
 Shurl is Shrunk's artificial intelligence platform. This is not meant to be a standalone project and is supposed to be a submodule for [Shrunk](https://github.com/oss/shrunk), an open-source URL shortener for Rutgers University.
 
