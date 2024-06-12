@@ -20,6 +20,7 @@ numpy = "^1.26.4"
 evaluate = "^0.4.2"
 accelerate = "^0.31.0"
 validators = "^0.28.3"
+scikit-learn = "^1.5.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.2.1"
