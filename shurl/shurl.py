@@ -19,6 +19,8 @@ class Shurl:
         self.epoch_count = epoch_count
         self.batch_size = batch_size
 
+        # TODO: Use [LongT5](https://huggingface.co/docs/transformers/en/model_doc/longt5)
+        # instead since there is a character limit.
         self.tokenizer = AutoTokenizer.from_pretrained("google-t5/t5-small")
         self.model = T5ForConditionalGeneration.from_pretrained("google-t5/t5-small")
         self.training_args = TrainingArguments(output_dir=".shurl-cache")
