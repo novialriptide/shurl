@@ -37,6 +37,12 @@ Check if your changes aren't regressive.
 docker-compose up test
 ```
 
+## Training
+
+When training the transformer model with the Shrunk database, each iteration took a significant amount of time (approximately 60 seconds per iteration on an Apple M2 Max with 32GB of RAM). Consequently, it is advisable to train the model in the cloud rather than on-device.
+
+Instructions for training the model on [Amazon Web Services](https://aws.amazon.com/) coming soon.
+
 ## Citations
 
 - Hugging Face Inc, [Transformers: State-of-the-Art Natural Language Processing](https://aclanthology.org/2020.emnlp-demos.6/)
