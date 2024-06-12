@@ -1,5 +1,4 @@
 from typing import List, Any
-from urllib.parse import urlparse
 from bs4 import BeautifulSoup
 import bs4
 import requests
@@ -67,8 +66,9 @@ def parse_training_data_from_bson(file_path: str) -> List[dict[str, Any]]:
     parsed_data = []
 
     for url in urls_data:
-        if urlparse(url["long_url"]).hostname in IGNORED_DOMAINS:
-            continue
+        for domain in IGNORED_DOMAINS:
+            if domain in url["long_url"]:
+                continue
 
         if len(url["aliases"]) == 0:
             continue
@@ -78,7 +78,7 @@ def parse_training_data_from_bson(file_path: str) -> List[dict[str, Any]]:
         met_requirements = False
         for alias in url["aliases"]:
             alias = alias["alias"]
-            if "-" in alias:
+            if "-" in alias or "_" in alias:
                 met_requirements = True
 
         if not met_requirements:
@@ -112,17 +112,25 @@ def parse_training_data_from_bson(file_path: str) -> List[dict[str, Any]]:
             continue
         except requests.exceptions.ConnectionError:
             continue
+        except requests.exceptions.TooManyRedirects:
+            continue
+        except requests.exceptions.RequestException:
+            continue
 
         for alias in url["aliases"]:
+            alias = alias["alias"]
+
+            if not ("-" in alias or "_" in alias):
+                continue
+
             document = {
                 "title": url["title"],
                 "original_url": url["long_url"],
-                "aliases": alias["alias"],
+                "aliases": alias,
                 "webpage_contents": webpage_contents,
             }
 
             parsed_data.append(document)
-
-        print(f"Loaded: {url['long_url']}")
+            print(f"Loaded: {alias} {url['long_url']}")
 
     return parsed_data
