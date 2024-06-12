@@ -1,4 +1,4 @@
-# Shurl [![build system: Poetry](https://img.shields.io/endpoint?url=https://python-poetry.org/badge/v0.json)](https://python-poetry.org/) [![code style: Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff) [![license: Apache-2.0](https://img.shields.io/github/license/novialriptide/shurl)](./LICENSE)
+# Shurl [![license: Apache-2.0](https://img.shields.io/github/license/novialriptide/shurl)](./LICENSE)
 
 Shurl is Shrunk's artificial intelligence platform. This is not meant to be a standalone project and is supposed to be a submodule for [Shrunk](https://github.com/oss/shrunk), an open-source URL shortener for Rutgers University.
 
@@ -12,23 +12,20 @@ Shurl is Shrunk's artificial intelligence platform. This is not meant to be a st
 
 ## Get Started
 
-We use [Poetry](https://python-poetry.org/) to manage our Python dependencies, you can learn more about it [here](https://python-poetry.org/docs/). We also use [Docker](https://docker.io/) to create consistent development and production environments by containerizing our applications. We also use [pre-commit](https://pre-commit.com/) to ensure the project stays clean and maintainable during its lifespan as deep-learning is a complex topic.
+We use [pre-commit](https://pre-commit.com/) to ensure that all committed code does not violate the [Ruff](https://docs.astral.sh/ruff/) linter.
 
-1. Clone this respository
+1. Fork, then clone the repository
 2. Install [pre-commit](https://pre-commit.com/)
-3. Install the git hook scripts
 
-```bash
-pre-commit install
 ```
-
-4. You're ready to contribute
+pip install pre-commit --break-system-packages && pre-commit install
+```
 
 ### Build
 
 Launch the service.
 
-```bash
+```
 docker-compose up app
 ```
 
@@ -36,7 +33,7 @@ docker-compose up app
 
 Check if your changes aren't regressive.
 
-```bash
+```
 docker-compose up test
 ```
 
