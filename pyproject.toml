@@ -15,6 +15,10 @@ flask = "^3.0.3"
 transformers = "^4.41.2"
 torch = "^2.3.1"
 sentencepiece = "^0.2.0"
+datasets = "^2.19.2"
+numpy = "^1.26.4"
+evaluate = "^0.4.2"
+accelerate = "^0.31.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.2.1"
