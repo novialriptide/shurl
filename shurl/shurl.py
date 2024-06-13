@@ -19,7 +19,7 @@ class Shurl:
 
         # TODO: Use [LongT5](https://huggingface.co/docs/transformers/en/model_doc/longt5)
         # instead since there is a character limit.
-        self.tokenizer = AutoTokenizer.from_pretrained("google-t5/t5-small")
+        self.tokenizer = AutoTokenizer.from_pretrained("google/long-t5-local-base")
         self.model = LongT5ForConditionalGeneration.from_pretrained("google/long-t5-local-base")
         self.training_args = TrainingArguments(output_dir=".shurl-cache")
         self.trainer: Optional[Trainer] = None
