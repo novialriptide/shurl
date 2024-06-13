@@ -11,11 +11,3 @@ services:
     environment:
       - FLASK_DEBUG=1
       - FLASK_APP=/shurl/app.py
-
-  test:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    stdin_open: true
-    tty: true
-    command: [poetry, run, pytest, -vv]

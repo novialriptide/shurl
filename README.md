@@ -21,20 +21,10 @@ We use [pre-commit](https://pre-commit.com/) to ensure that all committed code d
 pip install pre-commit --break-system-packages && pre-commit install
 ```
 
-### Build
-
-Launch the service.
+3. Launch the service.
 
 ```
-docker-compose up app
-```
-
-### Test
-
-Check if your changes aren't regressive.
-
-```
-docker-compose up test
+docker-compose up
 ```
 
 ## Training
