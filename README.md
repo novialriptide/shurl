@@ -33,6 +33,11 @@ When training the transformer model with the Shrunk database, each iteration too
 
 Instructions for training the model on [Amazon Web Services](https://aws.amazon.com/) coming soon.
 
+## Related Projects
+
+- Shrunk, https://github.com/oss/shrunk
+- Shurl Trainer (for SageMaker), https://github.com/novialriptide/shurl-sagemaker-trainer
+
 ## Citations
 
 - Hugging Face Inc, [Transformers: State-of-the-Art Natural Language Processing](https://aclanthology.org/2020.emnlp-demos.6/)
